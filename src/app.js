@@ -10,8 +10,10 @@ app.get('/', (_request, response) => {
 });
 
 const productRouter = require('./router/productRouter');
+const salesRouter = require('./router/salesRouter');
 
 app.use('/products', productRouter);
+app.use('/sales', salesRouter);
 
 app.use(require('./middlewares/erroHandler'));
 

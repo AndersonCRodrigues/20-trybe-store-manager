@@ -7,9 +7,11 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-const productRouter = require('./router/productRouter')
+const productRouter = require('./router/productRouter');
 
-app.use('/products', productRouter)
+app.use('/products', productRouter);
+
+app.use(require('./middlewares/erroHandler'));
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima

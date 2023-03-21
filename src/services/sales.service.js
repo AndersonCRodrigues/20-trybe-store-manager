@@ -3,20 +3,25 @@ const checkArray = require('../utils/checkIfIsArray');
 const productService = require('./product.service');
 
 const create = async (array) => {
-  console.log('oi');
   const checkedArray = checkArray(array);
 
-  checkedArray.forEach(async (e) => {
-    await productService.findById(e.productId);
-  });
+  try {
+    const promises = checkedArray.map(async (e) => {
+      await productService.findById(e.productId);
+    });
 
-  const id = await salesModel.createSale(checkedArray);
+    await Promise.all(promises);
 
-  const data = { id };
+    const id = await salesModel.createSale(checkedArray);
 
-  data.itemsSold = checkedArray.map((e) => ({ productId: e.productId, quantity: e.productId }));
+    const data = { id };
 
-  return data;
+    data.itemsSold = checkedArray.map((e) => ({ productId: e.productId, quantity: e.quantity }));
+
+    return data;
+  } catch (e) {
+    return e;
+  }
 };
 
 module.exports = { create };

@@ -8,7 +8,7 @@ const nameValidation = (req, _res, next) => {
     const errType = { status: 422, message: error.message };
     throw errType;
   }
-  console.log(error.message);
+
   if (error.details[0].type === 'any.required') {
     const errType = { status: 400, message: error.message };
     throw errType;

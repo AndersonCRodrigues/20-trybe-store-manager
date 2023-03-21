@@ -9,8 +9,6 @@ describe('Teste unitário para models de product', () => {
     .onFirstCall().resolves(mock.findAll)
     .onSecondCall().resolves(mock.findById));
 
-  after(() => sinon.restore());
-
   it('Deve devolver todos os produtos do banco', async () => {
     const result = await productModel.findAll();
 
@@ -22,4 +20,6 @@ describe('Teste unitário para models de product', () => {
 
     expect(result).to.be.deep.equal(mock.findById);
   })
+
+  after(() => sinon.restore());
 })

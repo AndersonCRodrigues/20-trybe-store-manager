@@ -19,4 +19,12 @@ const findById = async (id) => {
   return data;
 };
 
-module.exports = { findAll, findById };
+const create = async (name) => {
+  const [data] = await productModel.create(name);
+  const obj = {
+    id: data.insertId,
+    name,
+  };
+  return obj;
+};
+module.exports = { findAll, findById, create };

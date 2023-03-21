@@ -3,6 +3,7 @@ const checkArray = require('../utils/checkIfIsArray');
 const productService = require('./product.service');
 
 const create = async (array) => {
+  console.log('oi');
   const checkedArray = checkArray(array);
 
   checkedArray.forEach(async (e) => {

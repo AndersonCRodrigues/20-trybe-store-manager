@@ -46,15 +46,11 @@ const prodDelete = async (req, res, next) => {
 };
 
 const search = async (req, res) => {
-  try {
-    let data = await productService.findAll();
-    if (req.query.q) {
-      data = data.filter((e) => e.name.includes(req.query.q));
-    }
-     res.status(200).json(data);
-  } catch (e) {
-    res.status(500).json({ message: `Error ${e}` });
+  let data = await productService.findAll();
+  if (req.query.q) {
+    data = data.filter((e) => e.name.includes(req.query.q));
   }
+  return res.status(200).json(data);
 };
 
 module.exports = { findAll, findById, create, update, prodDelete, search };

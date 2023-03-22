@@ -45,4 +45,54 @@ describe('Teste unitário para product controller', () => {
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(mock.findById[0][0]);
   })
+
+   it('deve devolver produto com id', async () => {
+    sinon.stub(productServive, 'create').resolves(mock.serviceCreate);
+
+    const req = {
+      body: { name: 'produdo'},
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.create(req, res);
+
+    expect(res.status).to.have.been.calledWith(201);
+    expect(res.json).to.have.been.calledWith(mock.serviceCreate);
+   })
+
+   it('deve devolver status 204 após apagar o produto', async () => {
+    sinon.stub(productServive, 'prodDelete').resolves();
+
+    const req = {
+      params: { id: 1},
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.prodDelete(req, res);
+
+    expect(res.status).to.have.been.calledWith(204);
+   })
+
+    it('deve devolver lista de produtos completa', async () => {
+    sinon.stub(productServive, 'findAll').resolves(mock.search);
+
+    const req = {
+      query: {}
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.search(req, res);
+
+    expect(res.status).to.have.been.calledWith(200);
+    expect(res.json).to.have.been.calledWith(mock.search);
+  });
 })

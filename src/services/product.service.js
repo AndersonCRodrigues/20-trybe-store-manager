@@ -38,6 +38,7 @@ const update = async (id, name) => {
 const prodDelete = async (id) => {
   await findById(id);
 
-  await productModel.prodDelete(id);
+  const data = await productModel.prodDelete(id);
+  return data;
 };
 module.exports = { findAll, findById, create, update, prodDelete };

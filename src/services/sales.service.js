@@ -2,6 +2,10 @@ const salesModel = require('../models/sales.model');
 const checkArray = require('../utils/checkIfIsArray');
 const productService = require('./product.service');
 
+const productError = {
+  notFound: { status: 404, message: 'Sale not found' },
+};
+
 const create = async (array) => {
   const checkedArray = checkArray(array);
   try {
@@ -29,4 +33,14 @@ const findAll = async () => {
   return data;
 };
 
-module.exports = { create, findAll };
+const findById = async (id) => {
+  const data = await salesModel.findById(id);
+
+  if (data.length < 1) {
+    throw productError.notFound;
+  }
+
+  return data;
+};
+
+module.exports = { create, findAll, findById };

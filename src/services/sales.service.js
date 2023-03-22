@@ -49,4 +49,27 @@ const salesDelete = async (id) => {
   await salesModel.salesDelete(id);
 };
 
-module.exports = { create, findAll, findById, salesDelete };
+const update = async (id, sales) => {
+  const checkedArray = checkArray(sales);
+  try {
+    const promises = checkedArray.map(async (e) => {
+      await productService.findById(e.productId);
+      await findById(id);
+    });
+
+    await Promise.all(promises);
+
+    await salesModel.update(id, sales);
+
+    const data = { saleId: id };
+
+    data.itemsUpdated = checkedArray.map((e) => ({ productId: e.productId, quantity: e.quantity }));
+
+    return data;
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+};
+
+module.exports = { create, findAll, findById, salesDelete, update };

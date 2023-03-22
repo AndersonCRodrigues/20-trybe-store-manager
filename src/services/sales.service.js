@@ -43,4 +43,10 @@ const findById = async (id) => {
   return data;
 };
 
-module.exports = { create, findAll, findById };
+const salesDelete = async (id) => {
+  await findById(id);
+
+  await salesModel.salesDelete(id);
+};
+
+module.exports = { create, findAll, findById, salesDelete };

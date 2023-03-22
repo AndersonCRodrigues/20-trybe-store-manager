@@ -31,4 +31,14 @@ const findById = async (req, res, next) => {
   }
 };
 
-module.exports = { create, findAll, findById };
+const salesDelete = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await salesService.salesDelete(id);
+    res.status(204).json();
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { create, findAll, findById, salesDelete };

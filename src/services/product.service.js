@@ -29,20 +29,14 @@ const create = async (name) => {
 };
 
 const update = async (id, name) => {
-  const [check] = await productModel.findById(id);
-  if (check.length < 1) {
-    throw productError.notFound;
-  }
+  await findById(id);
   await productModel.update(id, name);
 
   return { id, name };
 };
 
 const prodDelete = async (id) => {
-  const [check] = await productModel.findById(id);
-  if (check.length < 1) {
-    throw productError.notFound;
-  }
+  await findById(id);
 
   await productModel.prodDelete(id);
 };

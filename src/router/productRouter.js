@@ -6,6 +6,7 @@ const router = Router();
 
 router
   .get('/', product.findAll)
+  .get('/search', product.search)
   .get('/:id', product.findById)
   .post('/', productValidation.nameValidation, product.create)
   .put('/:id', productValidation.nameValidation, product.update)

@@ -52,9 +52,9 @@ const salesDelete = async (id) => {
 const update = async (id, sales) => {
   const checkedArray = checkArray(sales);
   try {
+    await findById(id);
     const promises = checkedArray.map(async (e) => {
       await productService.findById(e.productId);
-      await findById(id);
     });
 
     await Promise.all(promises);

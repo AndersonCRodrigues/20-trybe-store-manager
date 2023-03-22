@@ -20,4 +20,18 @@ const findById = [[
   },
 ]];
 
-module.exports = { findAll, findById };
+const create = [
+  {
+    insertId: 1
+  },
+  null
+];
+
+const uptade = [
+  {
+    affectedRows: 1
+  },
+  null
+];
+
+module.exports = { findAll, findById, create, uptade };

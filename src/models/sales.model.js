@@ -9,6 +9,8 @@ const createSaleProduct = async (id, array) => {
   });
 
   await Promise.all(promises);
+
+  return true;
 };
 
 const createSale = async (array) => {
@@ -54,7 +56,8 @@ const findById = async (id) => {
 const salesProdDelete = async (id) => {
   const query = `DELETE FROM StoreManager.sales_products
                   WHERE sale_id = ?`;
-  return connection.execute(query, [id]);
+  const [data] = await connection.execute(query, [id]);
+  return data.affectedRows;
 };
 
 const salesDelete = async (id) => {
@@ -63,7 +66,8 @@ const salesDelete = async (id) => {
   const query = `DELETE FROM StoreManager.sales
                   WHERE id = ?`;
 
-  return connection.execute(query, [id]);
+  const [data] = await connection.execute(query, [id]);
+  return data.affectedRows;
 };
 
 const update = async (id, sales) => {
@@ -77,7 +81,15 @@ const update = async (id, sales) => {
 
   await Promise.all(promises);
 
-  return null;
+  return true;
 };
 
-module.exports = { createSale, findAll, findById, salesDelete, update };
+module.exports = {
+  createSale,
+  findAll,
+  findById,
+  salesDelete,
+  update,
+  createSaleProduct,
+  salesProdDelete,
+};

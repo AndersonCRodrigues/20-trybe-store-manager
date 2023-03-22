@@ -4,7 +4,6 @@ const productService = require('./product.service');
 
 const create = async (array) => {
   const checkedArray = checkArray(array);
-
   try {
     const promises = checkedArray.map(async (e) => {
       await productService.findById(e.productId);
@@ -20,7 +19,8 @@ const create = async (array) => {
 
     return data;
   } catch (e) {
-    return e;
+    console.error(e);
+    throw e;
   }
 };
 

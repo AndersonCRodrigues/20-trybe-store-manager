@@ -11,11 +11,10 @@ const findAll = async () => {
 
 const findById = async (id) => {
   const [data] = await productModel.findById(id);
-
   if (data.length < 1) {
-    return [productError.notFound];
+    throw productError.notFound;
+    // return [productError.notFound];
   }
-
   return data;
 };
 

@@ -18,7 +18,6 @@ const createSale = async (array) => {
   const id = sales.insertId;
 
   await createSaleProduct(id, array);
-
   return id;
 };
 

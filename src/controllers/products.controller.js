@@ -5,13 +5,17 @@ const findAll = async (_req, res) => {
   res.status(200).json(data);
 };
 
-const findById = async (req, res) => {
-  const { id } = req.params;
-  const [data] = await productService.findById(id);
-  if (data.status) {
-    return res.status(data.status).json({ message: data.message });
+const findById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const [data] = await productService.findById(id);
+   /*  if (data.status) {
+      return res.status(data.status).json({ message: data.message });
+    } */
+    res.status(200).json(data);
+  } catch (e) {
+    next(e);
   }
-  res.status(200).json(data);
 };
 
 const create = async (req, res) => {

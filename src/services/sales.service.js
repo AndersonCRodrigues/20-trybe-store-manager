@@ -46,7 +46,7 @@ const findById = async (id) => {
 const salesDelete = async (id) => {
   await findById(id);
 
-  await salesModel.salesDelete(id);
+  return salesModel.salesDelete(id);
 };
 
 const update = async (id, sales) => {

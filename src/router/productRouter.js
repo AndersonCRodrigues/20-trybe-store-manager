@@ -8,6 +8,7 @@ router
   .get('/', product.findAll)
   .get('/:id', product.findById)
   .post('/', productValidation.nameValidation, product.create)
-  .put('/:id', productValidation.nameValidation, product.update);
+  .put('/:id', productValidation.nameValidation, product.update)
+  .delete('/:id', product.prodDelete);
 
 module.exports = router;

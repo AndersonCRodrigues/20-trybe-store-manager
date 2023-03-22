@@ -35,4 +35,14 @@ const update = async (req, res, next) => {
   }
 };
 
-module.exports = { findAll, findById, create, update };
+const prodDelete = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    await productService.prodDelete(id);
+    res.status(204).json();
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { findAll, findById, create, update, prodDelete };

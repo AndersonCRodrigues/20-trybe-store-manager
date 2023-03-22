@@ -33,10 +33,17 @@ const update = async (id, name) => {
   if (check.length < 1) {
     throw productError.notFound;
   }
-  const data = await productModel.update(id, name);
-  if (data.affectedRows !== 1) {
-    throw productError.notChange;
-  }
+  await productModel.update(id, name);
+
   return { id, name };
 };
-module.exports = { findAll, findById, create, update };
+
+const prodDelete = async (id) => {
+  const [check] = await productModel.findById(id);
+  if (check.length < 1) {
+    throw productError.notFound;
+  }
+
+  await productModel.prodDelete(id);
+};
+module.exports = { findAll, findById, create, update, prodDelete };

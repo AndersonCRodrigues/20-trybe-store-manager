@@ -16,4 +16,9 @@ const create = async (req, res, next) => {
   }
 };
 
-module.exports = { create };
+const findAll = async (_req, res) => {
+  const data = await salesService.findAll();
+  res.status(200).json(data);
+};
+
+module.exports = { create, findAll };

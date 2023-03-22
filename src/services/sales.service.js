@@ -24,4 +24,9 @@ const create = async (array) => {
   }
 };
 
-module.exports = { create };
+const findAll = async () => {
+  const data = await salesModel.findAll();
+  return data;
+};
+
+module.exports = { create, findAll };

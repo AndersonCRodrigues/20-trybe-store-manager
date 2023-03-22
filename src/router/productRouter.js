@@ -8,6 +8,6 @@ router
   .get('/', product.findAll)
   .get('/:id', product.findById)
   .post('/', productValidation.nameValidation, product.create)
-  .patch('/:id', product.update);
+  .put('/:id', productValidation.nameValidation, product.update);
 
 module.exports = router;

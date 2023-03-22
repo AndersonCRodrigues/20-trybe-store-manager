@@ -2,6 +2,7 @@ const productModel = require('../models/product.model');
 
 const productError = {
   notFound: { status: 404, message: 'Product not found' },
+  notChange: { status: 400, message: 'Row not changed' },
 };
 
 const findAll = async () => {
@@ -33,7 +34,9 @@ const update = async (id, name) => {
     throw productError.notFound;
   }
   const data = await productModel.update(id, name);
-  console.log(data);
+  if (data.affectedRows !== 1) {
+    throw productError.notChange;
+  }
   return { id, name };
 };
 module.exports = { findAll, findById, create, update };

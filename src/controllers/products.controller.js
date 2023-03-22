@@ -8,6 +8,9 @@ const findAll = async (_req, res) => {
 const findById = async (req, res) => {
   const { id } = req.params;
   const [data] = await productService.findById(id);
+  if (data.status) {
+    return res.status(data.status).json({ message: data.message });
+  }
   res.status(200).json(data);
 };
 

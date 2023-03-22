@@ -26,4 +26,14 @@ const create = async (name) => {
   };
   return obj;
 };
-module.exports = { findAll, findById, create };
+
+const update = async (id, name) => {
+  const [check] = await productModel.findById(id);
+  if (check.length < 1) {
+    throw productError.notFound;
+  }
+  const data = await productModel.update(id, name);
+  console.log(data);
+  return { id, name };
+};
+module.exports = { findAll, findById, create, update };

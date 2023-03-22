@@ -24,4 +24,15 @@ const create = async (req, res) => {
   res.status(201).json(data);
 };
 
-module.exports = { findAll, findById, create };
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+    const data = await productService.update(id, name);
+    res.status(200).json(data);
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { findAll, findById, create, update };
